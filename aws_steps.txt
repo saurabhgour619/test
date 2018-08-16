@@ -1,0 +1,43 @@
+ssh -i "sourabh.pem" ec2-user@ec2-13-232-80-71.ap-south-1.compute.amazonaws.com
+
+1.sudo yum update -y
+
+2.Install java 1.8
+sudo yum install java-1.8.0 -y
+
+change java version to 1.8
+sudo /usr/sbin/alternatives --config java
+
+3.tomcat 8
+sudo yum install tomcat8 -y
+sudo yum install tomcat8-admin-webapps -y
+
+
+4.
+cd /usr/share/tomcat8/conf
+ sudo vi tomcat-users.xml
+<role rolename="manager-gui"/>
+<user username="manager" password="manager-password" roles="manager-gui"/>
+ :wq
+
+cd ..
+
+5. cd webapps/manager/META-INF/
+sudo vi context.xml
+<!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+:wq
+
+sudo service tomcat8 restart
+tomcat-- username manager pwd manager-password
+
+
+sudo yum install mysql-server
+sudo service mysqld start
+sudo /usr/bin/mysql_secure_installation
+
+http://ec2-13-232-80-71.ap-south-1.compute.amazonaws.com:8080/manager/html
+
+
+
+
